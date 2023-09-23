@@ -1,6 +1,12 @@
 import streamlit as st
 import datetime
 import pandas as pd
+from streamlit_extras.switch_page_button import switch_page
+
+st.set_page_config(
+    page_title="Hello",
+    page_icon="👋",
+)
  
 with st.form("my_form"):
    name_input = st.text_input("Enter name")
@@ -10,4 +16,5 @@ with st.form("my_form"):
    # Every form must have a submit button.
    submitted = st.form_submit_button("Submit")
    if submitted:
-       st.write("name", name_input, "date", date_input, "loc", loc_input)
+        switch_page("display")
+        st.write("name", name_input, "date", date_input, "loc", loc_input)
