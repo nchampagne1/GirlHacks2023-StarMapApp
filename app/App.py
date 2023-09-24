@@ -19,6 +19,12 @@ from skyfield.api import Star, load, wgs84
 from skyfield.data import hipparcos
 from skyfield.projections import build_stereographic_projection
 
+st.set_page_config(
+    page_icon ="👽",
+    layout = "wide",
+    page_title="SkyChart",
+)
+
 if 'loggedin' not in st.session_state:
     st.session_state['loggedin'] = False
 if 'name_input' not in st.session_state:
@@ -71,7 +77,7 @@ def horoscope_endpoint(sign):
     querystring = {"zodiacSign":"aries","timePeriod":"weekly"}
 
     headers = {
-	    "X-RapidAPI-Key": "9e8a986006msh75a31c2f395a481p10bc2bjsn5f445be82718",
+	    "X-RapidAPI-Key": "3fe8a5d459msh0c45c5c28b47e78p1dd4f0jsnc127cb1787cb",
 	    "X-RapidAPI-Host": "daily-horoscope-api.p.rapidapi.com"
     }
 
@@ -169,12 +175,22 @@ def map_gen(day, zip_code):
     plt.savefig("map.jpg")
 
 if st.session_state['loggedin']==False:
+    st.title("Welcome to SkyChart 🌓")
+    st.subheader("A place for those curious about their pattern with the stars.")
     with st.form("my_form"):
-        st.session_state['name_input'] = st.text_input("Enter name")
-        st.session_state['date_input'] = st.date_input("Your DOB", value=None)
-        st.session_state['loc_input'] = st.text_input("Location by Zip")
+        st.subheader("Create Your Personal Card")
+        st.session_state['name_input'] = st.text_input("Name")
+        st.session_state['date_input'] = st.date_input("Date of Birth", min_value=datetime(1950, 1, 1), value=None)
+        st.session_state['loc_input'] = st.text_input("Zipcode of Your Birthcity")
 
         # Every form must have a submit button.
+        m = st.markdown("""
+        <style>
+        div.stButton > button:first-child {
+            background-color: rgb(0, 0, 102);
+            color: rgb(255, 255, 255);
+        }
+        </style>""", unsafe_allow_html=True)
         submitted = st.form_submit_button("Submit")
    
     if submitted:
@@ -182,15 +198,15 @@ if st.session_state['loggedin']==False:
         st.rerun()
     
 elif st.session_state['loggedin']==True:
-    st.header("Hello, " + str(st.session_state['name_input']) + ".")
-    st.write(st.session_state['date_input'])
+    st.title("Hello, " + str(st.session_state['name_input']) + ".")
     sign = determine_sign(st.session_state['date_input'])
-    st.write(sign.upper())
+    st.write ("Created on " + st.session_state['date_input'].strftime("%B %d, %Y"))
+    st.write(sign.upper() + "🌙")
 
-    st.subheader("Your Horoscope")
+    st.subheader("Today's Vision 👁️")
     horoscope = horoscope_endpoint(sign=sign)
-    st.write("A DAY OF REFLECTION")
-    st.write(horoscope)
+    st.write("A DAY OF REFLECTION AWAITS YOU ")
+    st.write(horoscope['prediction'])
 
     map_gen(day=st.session_state['date_input'], zip_code=st.session_state['loc_input'])
     image = Image.open('map.jpg')
