@@ -18,5 +18,5 @@ A web application that generates a beautiful star map visualization given a user
 Won best themed hack at WiCS's 2023 GirlHacks Hackathon
 
 ## Screenshots 📷
-(![Screenshot 2025-03-10 154602](https://github.com/user-attachments/assets/2c37b630-36a2-4c1f-a422-24335ec3cb8d))
+![Screenshot 2025-03-10 154602](https://github.com/user-attachments/assets/2c37b630-36a2-4c1f-a422-24335ec3cb8d)
 ![Screenshot 2025-03-10 154631](https://github.com/user-attachments/assets/ace0996b-c223-41ba-901d-11459a5da133)
