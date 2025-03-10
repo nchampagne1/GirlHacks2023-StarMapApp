@@ -14,7 +14,7 @@ A web application that generates a beautiful star map visualization given a user
 - Libraries such as GeoPy, Skyfield, AstroPy
 - REST API
 
-## Honors
+## Honors 🏆
 Won best themed hack at WiCS's 2023 GirlHacks Hackathon
 
 ## Screenshots 📷
